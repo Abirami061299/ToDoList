@@ -1,0 +1,39 @@
+<template>
+  <lightning-layout class="slds-align_absolute-center slds-text-align_center container" multiple-rows>
+    <lightning-layout-item size="12">
+      <div class="time">{time}</div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12">
+      <div class="greeting">{greeting} </div>
+    </lightning-layout-item>
+    <lightning-layout-item size="11">
+      <div class="slds-text-heading_large slds-m-vertical_large">What is Your main focus on today? </div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" large-device-size="6" medium-device-size="10" small-device-size="12"
+      class="slds-m-top_large">
+      <lightning-layout>
+        <lightning-layout-item size="11">
+          <lightning-input value={task} type="text" label="What's in your mind" variant="label-hidden"
+            onchange={getTask} placeholder="What's in your mind?"></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="1">
+          <lightning-button-icon onclick={addTodoHandler} icon-name="utility:add" alternative-text="Add" class=""
+            type="button" title="Add todo"></lightning-button-icon>
+        </lightning-layout-item>
+      </lightning-layout>
+    </lightning-layout-item>
+    <lightning-layout-item size="12">
+      <div class="slds-m-top_large slds-text-heading_label">UPCOMING</div>
+      <template for:each={upcomingTodos} for:item="todoitem" for:index="index">
+        <c-to-do-item onupdate={fetchToDos}  key={todoitem.id} done={todoitem.done} todo-id={todoitem.id} index={index} todo-name={todoitem.name}></c-to-do-item>
+
+      </template>
+    </lightning-layout-item>
+    <lightning-layout-item size="12">
+      <div class="slds-m-top_large slds-text-heading_label">Completed</div>
+      <template for:each={completedTodos} for:item="todoitem" for:index="index">
+        <c-to-do-item onupdate={fetchToDos}  key={todoitem.id} done={todoitem.done} todo-id={todoitem.id} index={index} todo-name={todoitem.name}></c-to-do-item>
+      </template>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>
